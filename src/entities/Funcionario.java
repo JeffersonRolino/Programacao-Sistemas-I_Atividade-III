@@ -1,12 +1,9 @@
 package entities;
 
-import java.util.Objects;
-
 public class Funcionario {
     private String nome;
     private Double salarioBase;
     private Double salarioFamilia;
-
     private Double salarioFinal;
     private int quantidadeDeDependentes;
 
@@ -44,8 +41,7 @@ public class Funcionario {
     }
 
     private void setSalarioFamilia() {
-        this.salarioFamilia = this.salarioBase +
-                ((this.quantidadeDeDependentes * 134.98) +
+        this.salarioFamilia = ((this.quantidadeDeDependentes * 134.98) +
                 ((this.salarioBase * 0.03) * this.quantidadeDeDependentes));
     }
 
@@ -67,14 +63,10 @@ public class Funcionario {
 
     @Override
     public String toString() {
-
         return "Funcionário: " + this.nome + "\n" +
                 "Salário Base: R$" + this.salarioBase + "\n" +
                 "Quantidade de Dependentes: " + this.quantidadeDeDependentes + "\n" +
                 "Total do Salário Familia: R$" + this.salarioFamilia + "\n" +
                 "Salário Final: R$" + this.salarioFinal;
     }
-
-
-    // Funções Personalizadas
 }

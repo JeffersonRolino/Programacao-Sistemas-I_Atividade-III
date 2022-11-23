@@ -19,6 +19,7 @@ public class Main {
             System.out.println("Escolha uma opção");
             System.out.println("1 - Cadastrar Funcionário");
             System.out.println("2 - Listar Funcionários");
+            System.out.println("3 - Calcular Salário Família");
             System.out.println("0 - Sair");
 
 
@@ -33,6 +34,9 @@ public class Main {
                 }
                 else if(option == 2) {
                     listarFuncionarios(Funcionarios);
+                }
+                else if(option == 3){
+                    calcularSalarioFamilia(scanner);
                 }
                 else {
                     System.out.println("Valor inválido, por favor informe um novo valor...");
@@ -123,7 +127,6 @@ public class Main {
             System.out.println("2 - Não");
             scanner.nextLine();
         }
-
     }
 
     public static void listarFuncionarios(ArrayList<Funcionario> funcionarios) {
@@ -139,6 +142,81 @@ public class Main {
             System.out.println("--------------------------------------------------------");
 
             funcionarios.forEach((funcionario) -> System.out.println(funcionario + "\n"));
+        }
+    }
+
+    public static void calcularSalarioFamilia(Scanner scanner){
+        Double salario = 0.0;
+        Double salarioLiquido = 0.0;
+        Double salarioFamilia = 0.0;
+        int quantidadeDeDependentes = 0;
+
+        System.out.println("Informe o Salário do funcionário: ");
+        if(scanner.hasNextDouble()) {
+            salario = scanner.nextDouble();
+            scanner.nextLine(); //Limpar Scanner
+        }
+        else {
+            System.out.println("\n\tValor inválido...");
+            System.out.println("\tRetornando ao Menu Principal...\n");
+            scanner.nextLine(); //Limpar Scanner
+            return;
+        }
+
+        System.out.println("Informe a Quantidade de Dependentes do funcionário: ");
+        if(scanner.hasNextInt()) {
+            quantidadeDeDependentes = scanner.nextInt();
+            scanner.nextLine(); //Limpar Scanner
+        }
+        else {
+            System.out.println("\n\tValor inválido...");
+            System.out.println("\tRetornando ao Menu Principal...\n");
+            scanner.nextLine(); //Limpar Scanner
+            return;
+        }
+
+        if(salario != null){
+            salarioFamilia = (quantidadeDeDependentes * 134.98) + ((salario * 0.03) * quantidadeDeDependentes);
+        }
+
+        salarioLiquido = salario + salarioFamilia;
+
+        System.out.println("\nCalculo de Salário Família");
+        System.out.println("--------------------------------------------------------");
+        System.out.printf("Salário Bruto: R$" + "%.2f" + "\n", salario);
+        System.out.println("Quantidade de Dependentes: " + quantidadeDeDependentes);
+        System.out.printf("Salário Família: R$" + "%.2f" + "\n", salarioFamilia);
+        System.out.printf("Salário Líquido: R$" + "%.2f" + "\n", salarioLiquido);
+        System.out.println("--------------------------------------------------------");
+
+        System.out.println("\nGostaria de calcular novamente?");
+        System.out.println("1 - Sim");
+        System.out.println("2 - Não");
+
+        int calcular = 42;
+        if(scanner.hasNextInt()) {
+            calcular = scanner.nextInt();
+            scanner.nextLine(); //Limpar Scanner
+        }
+        else {
+            System.out.println("\n\tValor inválido...");
+            System.out.println("\tRetornando para o Menu Principal...\n");
+            scanner.nextLine(); //Limpar Scanner
+            return;
+        }
+
+        if(calcular == 2) {
+            return;
+        }
+        else if(calcular == 1) {
+            calcularSalarioFamilia(scanner);
+        }
+        else {
+            System.out.println("\nValor inválido...");
+            System.out.println("Gostaria de calcular novamente?");
+            System.out.println("1 - Sim");
+            System.out.println("2 - Não");
+            scanner.nextLine();
         }
     }
 }
